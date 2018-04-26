@@ -45,7 +45,7 @@ celery.conf.update(app.config)
 
 # get status of schedule background task
 @app.route('/')
-def root_uri_dummy( ):
+def root_uri_dummy():
     return "Go to the Product"
 
 if __name__ == '__main__':
