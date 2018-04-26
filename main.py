@@ -45,9 +45,9 @@ celery.conf.update(app.config)
 
 # get status of schedule background task
 @app.route('/')
-def taskstatus(task_id):
+def root_uri_dummy( ):
     return "Go to the Product"
-    
+
 if __name__ == '__main__':
     app.secret_key = 'atulsecretkey'
     #  using gevent WSGIServer to handle request
