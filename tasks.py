@@ -18,13 +18,13 @@ def read_csv_file(self, path):
         next(reader, None)
         for reader in reader:
             try:
-                print "inserting record in database"
+                print ("inserting record in database")
                 product_data = Product(name=reader[0],sku=reader[1],description=reader[2],is_active=True)
                 db.session.add(product_data)
                 db.session.commit()
-                print "Inserted record in database", product_data
+                print ("Inserted record in database", product_data)
             except:
-                print "skipping record because of error================"
+                print ("skipping record because of error================")
     # remove file from folder
     os.remove(path)
     return {'current': 100, 'total': 100, 'status': 'Task completed!',
