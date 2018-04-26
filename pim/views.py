@@ -40,11 +40,11 @@ def products():
         search_title = request.args['search_title']
         product = Product.query.filter(Product.name.contains(search_title)).all()
         # search by sku
-        # try:
-        #     search_sku = request.args['search_sku']
-        #     product = Product.query.filter(Product.sku.contains(search_sku)).all()
-        # except:
-        #     product = Product.query.filter(Product.name.contains(search_title)).all()
+        try:
+            search_sku = request.args['search_sku']
+            product = Product.query.filter(Product.sku.contains(search_sku)).all()
+        except:
+            product = Product.query.all()
         # import pdb; pdb.set_trace()
         # queryRes = Product.query.filter(Product.fullFilePath.startswith(filePath)).all()
         # product = Product.query.filter(Product.name.startwith(search_word)).all()
