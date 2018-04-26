@@ -37,7 +37,7 @@ db = SQLAlchemy(app)
 
 db.init_app(app)
 
-host = 'http://localhost:5000/'
+# host = 'http://localhost:5000/'
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'], include=['tasks'])
 
