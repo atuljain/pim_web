@@ -30,6 +30,7 @@ app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 # app.config.from_object(DevelopmentConfig)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test-4.db'
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
 db = SQLAlchemy(app)
