@@ -33,7 +33,7 @@ def resetdb():
     from pim.models import Product
     db.create_all()
     db.session.commit()
-    print "done!"
+    print ("done!")
 
 @manager.command
 def seed():
