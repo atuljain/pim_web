@@ -8,7 +8,7 @@ import csv
 import json
 from werkzeug import secure_filename
 from main import celery
-from pim.tasks import *
+from tasks import *
 from flask_paginate import Pagination, get_page_parameter
 from werkzeug.contrib.cache import SimpleCache
 
