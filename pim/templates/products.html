@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+   <html>
+      <head>
+         <title>TODO</title>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+         <script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>
+         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <style type="text/css">
+      
+            @media only screen and (min-width : 481px) {
+              .flex-row.row {
+                display: flex;
+                flex-wrap: wrap;
+              }
+              .flex-row.row > [class*='col-'] {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+
+              }
+              .flex-row.row:after, 
+              .flex-row.row:before {
+                display: flex;
+              }
+            }
+
+            @media only screen and (min-width: 992px) {
+               .bgfbox .flex-row .col-md-4:first-child > a, 
+               .bgfbox-first, 
+               .bgfbox-content {
+                  display: flex;
+                  flex-grow: 1;
+                  flex-direction: column;
+               }
+            }
+
+            .border {
+               border: 2px solid #e8e8e8
+            }
+            
+            .bgfbox .flex-row {
+               margin-left: 0px;
+               margin-right: 0px;
+            }
+
+            .bgfbox .col-md-4 {
+               padding: 0;
+            }
+
+            .bgfbox .bgfbox-content {
+               padding: 50px;
+            }
+
+            .row-divider {
+                margin-bottom: 20px;
+            }
+
+            .bg-white {
+               background-color: #fff;
+            }
+
+            .bgfbox {
+               padding-top: 80px;
+               padding-bottom: 80px;
+            }
+            #myProgress {
+                /* width: 100%; */
+                background-color: grey;
+            }
+            #myBar {
+                width: 1%;
+                height: 30px;
+                background-color: green;
+            }
+            
+            input, button {
+               float:left;
+            }
+
+        .hide {
+          display: none;
+        }
+
+
+         </style>>
+      </head>
+      <body>
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">TODO</a>
+                  <!-- <a class="navbar-brand" href="/logout">logout</a> -->
+               </div>
+               <div id="navbar" class="navbar-collapse collapse">
+               </div>
+            </div>
+         </nav>
+         <div class=page>
+            <div class=metanav>
+               <section class="bgfbox">
+                  <div class="container">
+                     <div class="row flex-row">
+
+                        <div class="col-md-12">
+                              <div class="row flex-row">
+
+                                 <div class="col-md-12">
+                                    <div class="bgfbox-first bg-white border row-divider">
+                                        <div class="bgfbox-content">
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col-md-12">
+                                                    <label for="file">Select a file</label>
+                                                    <form id="upload-file" method="post" enctype="multipart/form-data">
+                                                      <fieldset>
+                                                          <input class="input" name="file" type="file">
+                                                          <button class="input" id="upload-file-btn" type="button">Upload</button>
+                                                      </fieldset>
+                                                  </form>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <div class="col-md-12" id="progressbar">
+                                                    <div id="myBar"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3>Product Upload Task Status</h3>  
+                                                <div class="progress">
+                                                    
+                                                    <div></div>
+                                                    <div></div>        
+                                                    <div>0%</div>      
+                                                    <div>...</div>    
+                                                    <div>&nbsp;</div> 
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                 </div>
+
+                              </div>
+                              <div class="row flex-row">
+
+                                 <div class="col-md-12">
+                                    <div class="bgfbox-first bg-white border">
+                                       <div class="bgfbox-content">
+                                          <div class="bgfbox-text-wrap">
+                                              <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#active">Active</a></li>
+                                                <li><a data-toggle="tab" href="#archived">Archived</a></li>
+                                              </ul>
+
+                                              <div class="tab-content">
+                                                <div id="active" class="tab-pane fade in active">
+                                                  <h3>Active Products</h3>
+                                                      <form id="searchform" action="" method="get" accept-charset="utf-8">
+                                                          <button class="searchbutton" type="submit">
+                                                            <i class="fa fa-search"></i>
+                                                          </button>
+                                                          <input class="searchfield" id="titleSearch" name="search_title" type="text" placeholder="Search By name">
+                                                          <!-- <input class="searchfield1" id="skuSearch" name="search_sku" type="text" placeholder="Search By SKU"> -->
+                                                        </form>
+                                                      <table class="table">
+                                                          <thead>
+                                                            <tr>
+                                                              <th scope="col">Name</th>
+                                                              <th scope="col">SKU</th>
+                                                              <th scope="col">Descriptipn</th>
+                                                              <th scope="col">is_active</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              {% for product in products %}
+                                                              <tr>
+                                                                <td>{{product.name}}</td>
+                                                                <td>{{product.sku}}</td>
+                                                                <td>{{product.description}}</td>
+                                                                <td>{{product.is_active}}</td>
+                                                              </tr>
+                                                              {% endfor %}
+                                                            
+                                                          </tbody>
+                                                        </table>
+                                                        <div class="pagination">
+                                                            <span class="step-links">
+                                                                
+                                                            </span>
+                                                        </div>
+                                                </div>
+                                                <div id="archived" class="tab-pane fade">
+                                                  <h3>Archived Products</h3>
+                                                      <form id="searchform" action="" method="get" accept-charset="utf-8">
+                                                          <button class="searchbutton" type="submit">
+                                                            <i class="fa fa-search"></i>
+                                                          </button>
+                                                          <input class="searchfield" id="titleSearch" name="search_title" type="text" placeholder="Search By name">
+                                                          <!-- <input class="searchfield1" id="skuSearch" name="search_sku" type="text" placeholder="Search By SKU"> -->
+                                                        </form>
+                                                      <table class="table">
+                                                          <thead>
+                                                            <tr>
+                                                              <th scope="col">Name</th>
+                                                              <th scope="col">SKU</th>
+                                                              <th scope="col">Descriptipn</th>
+                                                              <th scope="col">is_active</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                              {% for product in products_archived %}
+                                                              <tr>
+                                                                <td>{{product.name}}</td>
+                                                                <td>{{product.sku}}</td>
+                                                                <td>{{product.description}}</td>
+                                                                <td>{{product.is_active}}</td>
+                                                              </tr>
+                                                              {% endfor %}
+                                                            
+                                                          </tbody>
+                                                        </table>
+                                                        <div class="pagination">
+                                                            <span class="step-links">
+                                                                
+                                                            </span>
+                                                        </div>
+                                                </div>
+                                              </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
+         </div> 
+      </body>
+      <script type = "text/javascript">
+          $(function() {
+            $('#upload-file-btn').click(function() {
+              
+                var form_data = new FormData($('#upload-file')[0]);
+                // add task status elements 
+                div = $('<div class="progress"><h1>Task Status</h1><div></div><div>0%</div><div>...</div><div>&nbsp;</div></div><hr>');
+                $('#progress').append(div);
+
+                // create a progress bar
+                var nanobar = new Nanobar({
+                    bg: '#44f',
+                    target: div[0].childNodes[0]
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/products/import',
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    async: false,
+                    success: function(data, status, request) {
+                      move()
+                      console.log(request.responseText, data)
+                      status_url = request.getResponseHeader('Location');
+                      // status_url = request['Location'];
+                      console.log(request.responseText['Location'])
+                      update_progress(status_url, nanobar, div[0]);
+                      console.log('Success!', status_url);
+                    },
+                });
+            });
+        });
+        function move() {
+          var elem = document.getElementById("myBar"); 
+          var width = 1;
+          var id = setInterval(frame, 10);
+          function frame() {
+              if (width >= 100) {
+                  clearInterval(id);
+              } else {
+                  width++; 
+                  elem.style.width = width + '%'; 
+              }
+          }
+      }
+      function update_progress(status_url, nanobar, status_div) {
+        console.log('update progress')
+        // send GET request to status URL
+        $.getJSON(status_url, function(data) {
+          console.log(data)
+            // update UI
+            percent = parseInt(data['current'] * 100 / data['total']);
+            nanobar.go(percent);
+            $(status_div.childNodes[1]).text(percent + '%');
+            $(status_div.childNodes[2]).text(data['status']);
+            if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                if ('result' in data) {
+                    // show result
+                    $(status_div.childNodes[3]).text('Result: ' + data['result']);
+                }
+                else {
+                    // something unexpected happened
+                    $(status_div.childNodes[3]).text('Result: ' + data['state']);
+                }
+            }
+            else {
+                // rerun in 2 seconds
+                setTimeout(function() {
+                    update_progress(status_url, nanobar, status_div);
+                }, 2000);
+            }
+        });
+    }
+      </script>
+   </html>
