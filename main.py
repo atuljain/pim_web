@@ -43,6 +43,11 @@ celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'], include=['task
 
 celery.conf.update(app.config)
 
+# get status of schedule background task
+@app.route('/')
+def taskstatus(task_id):
+    return "Go to the Product"
+    
 if __name__ == '__main__':
     app.secret_key = 'atulsecretkey'
     #  using gevent WSGIServer to handle request
