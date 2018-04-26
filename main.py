@@ -13,7 +13,7 @@ app_name = 'PIM_WEB'
 # Template load
 template_loader = jinja2.ChoiceLoader([
     app.jinja_loader,
-    jinja2.FileSystemLoader('./avi2/templates'),
+    jinja2.FileSystemLoader('./pim_web/templates'),
 ])
 
 
@@ -28,7 +28,7 @@ app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
 
 app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 # app.config.from_object(DevelopmentConfig)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test-4.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/product.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
