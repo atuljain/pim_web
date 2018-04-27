@@ -1,6 +1,11 @@
-from main import app, celery, db
-import os, csv, random, time
-from pim.models import *
+from main import celery
+from main import db
+import os
+import csv
+import random
+import time
+from pim.models import Product
+
 
 @celery.task(bind=True)
 def read_csv_file(self, path):
@@ -14,18 +19,16 @@ def read_csv_file(self, path):
     csv_data = path
     with open(csv_data) as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
-        # skip first line
         next(reader, None)
         for reader in reader:
             try:
                 print ("inserting record in database")
-                product_data = Product(name=reader[0],sku=reader[1],description=reader[2],is_active=True)
+                product_data = Product(name=reader[0], sku=reader[1], description=reader[2], is_active=True)
                 db.session.add(product_data)
                 db.session.commit()
                 print ("Inserted record in database", product_data)
-            except:
-                print ("skipping record because of error================")
-    # remove file from folder
+            except Exception:
+                print ("skipping record because of error")
     os.remove(path)
-    return {'current': 100, 'total': 100, 'status': 'Task completed!',
-            'result': 42}
+    return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': 42}
+# END TASK HERE

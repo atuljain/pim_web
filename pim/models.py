@@ -1,11 +1,10 @@
 # -*- encoding: utf-8 -*-
-# begin
 from sqlalchemy.ext.declarative import declarative_base
-from flask_sqlalchemy import SQLAlchemy
-
+from main import db
 import sys
+
 sys.path.append("..")
-from main import db,app
+
 # db = app.db
 # db = SQLAlchemy(app)
 

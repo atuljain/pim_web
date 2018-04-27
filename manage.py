@@ -1,12 +1,8 @@
-import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from main import app, db
 from pim.models import Product
-from pim import views 
-import datetime
+from pim import views
 
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -19,7 +15,6 @@ def resetdb():
     """Destroys and creates the database + tables."""
 
     from sqlalchemy_utils import database_exists, create_database, drop_database
-    from sqlalchemy import text
 
     DB_URL = app.config['SQLALCHEMY_DATABASE_URI']
     if database_exists(DB_URL):
@@ -30,10 +25,10 @@ def resetdb():
         create_database(DB_URL)
 
     print('Creating tables.')
-    from pim.models import Product
     db.create_all()
     db.session.commit()
     print ("done!")
+
 
 @manager.command
 def seed():
@@ -46,6 +41,7 @@ def seed():
     )
     db.session.add(product)
     db.session.commit()
+
 
 if __name__ == '__main__':
     manager.run()
