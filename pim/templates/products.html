@@ -82,8 +82,6 @@
         .hide {
           display: none;
         }
-
-
          </style>>
       </head>
       <body>
@@ -117,6 +115,7 @@
                                         <div class="bgfbox-content">
                                           <div class="row">
                                             <div class="col-md-6">
+                                                <h4 id="message"></h4>
                                                 <div class="col-md-12">
                                                     <label for="file">Select a file</label>
                                                     <form id="upload-file" method="post" enctype="multipart/form-data">
@@ -273,10 +272,10 @@
                     async: false,
                     success: function(data, status, request) {
                       move()
+                      message = request.getResponseHeader('Message')
+                      document.getElementById("message").innerHTML = message
                       console.log(request.responseText, data)
                       status_url = request.getResponseHeader('Location');
-                      // status_url = request['Location'];
-                      console.log(request.responseText['Location'])
                       update_progress(status_url, nanobar, div[0]);
                       console.log('Success!', status_url);
                     },

@@ -80,7 +80,7 @@ def product_upload():
                 # if file size is correct than schedule a background task to acess files and put data into database
                 schedule_csv_upload = read_csv_file.apply_async(args=[os.path.join(app.config['UPLOAD_FOLDER'], file_name)], countdown=60)
                 return jsonify({}), 202, {'Location': url_for('pim_app.taskstatus',
-                                                  task_id=schedule_csv_upload.id)}
+                                                  task_id=schedule_csv_upload.id), "Message":"Background Job created to upload product in database"}
             else:
                 return json.dumps({'success':True, 'message':'file size is not compatible'}), 200, {'ContentType':'application/json'}
         else:
