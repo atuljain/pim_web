@@ -1,6 +1,6 @@
 from flask import Flask, request, Response, render_template, redirect, jsonify, \
 session, g, redirect, flash, url_for, abort, flash, Blueprint, make_response
-from pim.models import *
+from pim.models import Product
 import os
 import sys
 import io
