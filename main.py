@@ -52,7 +52,8 @@ def root_uri_dummy():
 if __name__ == '__main__':
     app.secret_key = 'atulsecretkey'
     #  using gevent WSGIServer to handle request
-    from gevent.wsgi import WSGIServer
-    http_server = WSGIServer((), app)
-    http_server.serve_forever()
+    # from gevent.wsgi import WSGIServer
+    # http_server = WSGIServer((), app)
+    # http_server.serve_forever()
+    app.run(debug=True)
 
