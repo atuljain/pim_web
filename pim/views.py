@@ -82,11 +82,15 @@ def product_upload():
                 return jsonify({}), 202, {'Location': url_for('pim_app.taskstatus',
                                                   task_id=schedule_csv_upload.id), "Message":"Background Job created to upload product in database"}
             else:
-                return json.dumps({'success':True, 'message':'file size is not compatible'}), 200, {'ContentType':'application/json'}
+                
+                return jsonify({}), 202, {"Message":"file size is not compatible"} 
+                # json.dumps({'success':True, 'message':'file size is not compatible'}), 200, {'ContentType':'application/json'}
         else:
-            return json.dumps({'success':True, 'message':'file extension is not compatible'}), 200, {'ContentType':'application/json'}
+            return jsonify({}), 202, {"Message":"file extension is not compatible"} 
+            # json.dumps({'success':True, 'message':'file extension is not compatible'}), 200, {'ContentType':'application/json'}
             # return redirect('/products')
-    return render_template('upload.html')
+    return redirect('/products')
+    # render_template('upload.html')
 
 # check is file extension is valid or not
 def allowed_file(filename):
