@@ -19,7 +19,7 @@ template_loader = jinja2.ChoiceLoader([
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-app.config['UPLOAD_FOLDER'] = os.getcwd()+'/uploads'
+app.config['UPLOAD_FOLDER'] = '/tmp/'
 
 app.jinja_loader = template_loader
 
