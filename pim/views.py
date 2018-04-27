@@ -35,13 +35,16 @@ def products():
     # get page params
     page = request.args.get(get_page_parameter(), type=int, default=1)
     # search by title
-    if 'search_title' in request.args:
+    # import ipdb; ipdb.set_trace()
+    if 'search_title' in request.args and len(request.args['search_title']) != 0:
         search_title = request.args['search_title']
+        print len(search_title), "-----"
         product = Product.query.filter(Product.name.contains(search_title)).all()
         print "---title"
     # search by sku
-    if 'search_sku' in request.args:
+    elif 'search_sku' in request.args and len(request.args['search_sku']) != 0:
         search_sku = request.args['search_sku']
+        print search_sku, "-----"
         product = Product.query.filter(Product.sku.contains(search_sku)).all()
         print "---sku"
     else:
