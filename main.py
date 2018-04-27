@@ -24,9 +24,14 @@ app.config['UPLOAD_FOLDER'] = '/tmp/'
 app.jinja_loader = template_loader
 
 # Using celery to run background task
-app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
-
-app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
+try:
+    app.config['CELERY_BROKER_URL'] = os.environ['REDIS_URL']
+except:
+    app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
+try:
+    app.config['CELERY_RESULT_BACKEND'] = os.environ['REDIS_URL']
+except:
+    app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 # app.config.from_object(DevelopmentConfig)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////%s/product.db' %os.getcwd()
 
